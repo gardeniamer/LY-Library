@@ -228,6 +228,7 @@ function register_config() {
     var email_register_list = document.querySelector('.email_register_list_One');
     var phone_register_list = document.querySelector('.phone_register_list_One');
 
+
     var phone_Number = document.getElementById('phone_Number');
     var email_get = document.getElementById('email_get');
     var phone_get = document.getElementById('phone_get');
@@ -247,7 +248,35 @@ function register_config() {
         phone_register_list.style.display = "block";
     }
     var time = 60;//验证码倒计时
-
+    phone_get.addEventListener("click", function () {
+        phone_get.disabled = true;
+        var timer = setInterval(function () {
+            if (time == 0) {
+                clearInterval(timer);
+                phone_get.disabled = false;
+                phone_get.innerHTML = "获取短信验证码";
+                time = 60;
+            } else {
+                phone_get.innerHTML = "还剩下" + time + "秒";
+                time--;
+            }
+        }, 1000);
+    });
+    var time = 60;//验证码倒计时
+    email_get.addEventListener("click", function () {
+        email_get.disabled = true;
+        var timer = setInterval(function () {
+            if (time == 0) {
+                clearInterval(timer);
+                email_get.disabled = false;
+                email_get.innerHTML = "获取邮箱验证码";
+                time = 60;
+            } else {
+                email_get.innerHTML = "还剩下" + time + "秒";
+                time--;
+            }
+        }, 1000);
+    });
     //验证邮箱是否合法
     var email_value = document.getElementById('email_value');
     email_value.onblur = function () {

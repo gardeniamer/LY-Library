@@ -442,6 +442,7 @@ input {
   line-height: 39px;
 }
 
+
 .email_register {
   position: absolute;
   top: 25px;
@@ -505,21 +506,46 @@ input {
   height: 100px;
 }
 
-li {
-  list-style: none;
-  margin-top: -5px;
+.name_msg {
+  float: left;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 44px;
+  transform: translate(10px, 36px);
+  font-size: 28px;
 }
 
-.list_one input {
-  margin: 50px auto;
-  margin-left: 50px;
+.name input {
   width: 213px;
-  height: 42px;
+  height: 34px;
   background: rgba(255, 255, 255, 0.4);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.5px);
   border-radius: 5px;
   border: 0;
+  transform: translate(55px, 41px);
+}
+
+
+
+.number_msg {
+  float: left;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 44px;
+  transform: translate(-47px, 142px);
+  font-size: 28px;
+}
+
+.number input {
+  width: 213px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.5px);
+  border-radius: 5px;
+  border: 0;
+  transform: translate(0px, 146px);
 }
 
 #btn01,
@@ -548,7 +574,8 @@ li {
   font-style: normal;
   font-weight: 400;
   line-height: 44px;
-  transform: translate(10px, 40px);
+  transform: translate(10px, 36px);
+  font-size: 28px;
 }
 
 .email {
@@ -556,12 +583,13 @@ li {
   font-style: normal;
   font-weight: 400;
   line-height: 44px;
-  transform: translate(10px, 40px);
+  transform: translate(10px, 36px);
+  font-size: 28px;
 }
 
 .phone input {
   width: 213px;
-  height: 42px;
+  height: 34px;
   background: rgba(255, 255, 255, 0.4);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.5px);
@@ -582,13 +610,14 @@ li {
   float: left;
   font-style: normal;
   font-weight: 400;
-  line-height: 44px;
+  line-height: 42px;
   transform: translate(10px, 78px);
+  font-size: 28px;
 }
 
 .check_number input {
   width: 213px;
-  height: 42px;
+  height: 34px;
   background: rgba(255, 255, 255, 0.4);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.5px);
@@ -617,7 +646,18 @@ li {
   height: 16px;
   font-size: 10px;
   color: #006EFF;
-  transform: translate(-42px, 78px);
+  transform: translate(179px, 41px);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.email button {
+  width: 100px;
+  height: 16px;
+  font-size: 10px;
+  color: #006EFF;
+  transform: translate(179px, 41px);
   border: none;
   background: none;
   cursor: pointer;

@@ -6,18 +6,14 @@ user_register_copy.innerHTML = `<div class="user_register_type">
             <div class="phone_register_list_One">
                 <div class="phone_register_list" id="phone_register_list">
                     <div class="list_one">
-                        <li>
-                            <a>姓名</a>
-                            <input type="text" id="name">
-                        </li>
-                        <li>
-                            <a>方向</a>
-                            <input type="text" id="direction">
-                        </li>
-                        <li>
-                            <a>期数</a>
-                            <input type="text" id="number">
-                        </li>
+                        <div class="name">
+                            <div class="name_msg" >姓名</div>
+                            <input type= "text" id= "name">
+                        </div>
+                        <div class="number">
+                            <div class="number_msg" >学号</div>
+                            <input type= "text" id= "number">
+                        </div>
                     </div>
                     <div class="list_two">
                         <div class="phone">
@@ -37,18 +33,14 @@ user_register_copy.innerHTML = `<div class="user_register_type">
             <div class="email_register_list_One">
                 <div class="email_register_list" id="email_register_list">
                     <div class="list_one">
-                        <li>
-                            <a>姓名</a>
-                            <input type="text" id="name">
-                        </li>
-                        <li>
-                            <a>方向</a>
-                            <input type="text" id="direction">
-                        </li>
-                        <li>
-                            <a>期数</a>
-                            <input type="text" id="number">
-                        </li>
+                        <div class="name">
+                            <div class="name_msg" >姓名</div>
+                            <input type= "text" id= "name">
+                        </div>
+                        <div class="number">
+                            <div class="number_msg" >学号</div>
+                            <input type= "text" id= "number">
+                        </div>
                     </div>
                     <div class="list_two">
                         <div class="phone">
