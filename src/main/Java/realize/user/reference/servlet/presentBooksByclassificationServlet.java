@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 @WebServlet(name = "/presentBooksByclassificationServlet",value = "/presentBooksByclassification-servlet")
+//实现通过指定类别查看书籍
 public class presentBooksByclassificationServlet extends HttpServlet {
     private referenceDao referenceDao = new referenceDao();
     @Override
