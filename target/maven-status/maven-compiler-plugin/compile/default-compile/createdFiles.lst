@@ -1,6 +1,10 @@
 filter\Filter.class
-realize\user\register\entity\User.class
+realize\user\reference\dao\referenceDao.class
+realize\user\reference\servlet\presentcertainBookServlet.class
 realize\user\login\servlet\loginServlet.class
+realize\user\reference\servlet\presentBooksByclassificationServlet.class
 realize\user\register\service\registerService.class
+realize\user\reference\servlet\presentAllBooksServlet.class
+realize\user\reference\entity\booksEntity.class
 realize\user\register\servlet\registerServlet.class
 Util\JDBCUtil\JDBCUtil.class
