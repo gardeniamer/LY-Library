@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3954784 */
+  src: url('iconfont.woff2?t=1678870730711') format('woff2'),
+       url('iconfont.woff?t=1678870730711') format('woff'),
+       url('iconfont.ttf?t=1678870730711') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 85px;
+  font-style: normal;
+  text-align: center;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-liebiao:before {
+  content: "\e65f";
+}
+

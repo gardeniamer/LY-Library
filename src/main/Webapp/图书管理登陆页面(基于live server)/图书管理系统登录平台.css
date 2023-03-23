@@ -1,5 +1,5 @@
 body {
-  background: url(https://liangjia.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720230131162127%201.png);
+  background: url(https://aaaaaabc.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720230131162127%201.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -442,6 +442,7 @@ input {
   line-height: 39px;
 }
 
+
 .email_register {
   position: absolute;
   top: 25px;
@@ -505,28 +506,128 @@ input {
   height: 100px;
 }
 
-li {
-  list-style: none;
-  margin-top: -5px;
+.name_msg {
+  float: left;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 44px;
+  transform: translate(10px, 36px);
+  font-size: 28px;
 }
 
-.list_one input {
-  margin: 50px auto;
-  margin-left: 50px;
+.name input {
   width: 213px;
-  height: 42px;
+  height: 34px;
   background: rgba(255, 255, 255, 0.4);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.5px);
   border-radius: 5px;
   border: 0;
+  transform: translate(76px, 41px);
+}
+
+.direction_msg{
+    float: left;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 44px;
+      transform: translate(105px, 36px);
+      font-size: 28px;
+}
+.direction input{
+    width: 213px;
+      height: 34px;
+      background: rgba(255, 255, 255, 0.4);
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(4.5px);
+      border-radius: 5px;
+      border: 0;
+      transform: translate(175px, 41px);
+}
+.num_of_periods_msg {
+  float: left;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 44px;
+  transform: translate(105px, 105px);
+  font-size: 28px;
+}
+
+.num_of_periods input {
+  width: 213px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.5px);
+  border-radius: 5px;
+  border: 0;
+  transform: translate(175px, 112px);
+}
+.reg_password_msg {
+  float: left;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 44px;
+  transform: translate(105px, 169px);
+  font-size: 28px;
+}
+
+.reg_password input {
+  width: 213px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.5px);
+  border-radius: 5px;
+  border: 0;
+  transform: translate(175px, 170px);
+}
+
+
+.stu_number_msg {
+  float: left;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 44px;
+  transform: translate(-47px, 116px);
+  font-size: 28px;
+}
+
+.stu_number input {
+  width: 213px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.5px);
+  border-radius: 5px;
+  border: 0;
+  transform: translate(20px, 116px);
+}
+.phone_number_msg{
+    float: left;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 44px;
+      transform: translate(-4px, 144px);
+      font-size: 28px
+}
+.phone_number input{
+      width: 213px;
+      height: 34px;
+      background: rgba(255, 255, 255, 0.4);
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(4.5px);
+      border-radius: 5px;
+      border: 0;
+      transform: translate(9px, 136px);
 }
 
 #btn01,
 #btn02 {
-  width: 170px;
+  width: 300px;
   height: 53px;
   border-radius: 30px;
+  border: none;
   background: #006EFF;
   color: #ffffff;
   font-size: 23px;
@@ -534,7 +635,7 @@ li {
   bottom: 33px;
   right: 170px;
   transition: all .5s;
-  transform: translateX(75px);
+  transform: translate(-29px,75px);
 }
 
 #btn01:hover,
@@ -548,7 +649,8 @@ li {
   font-style: normal;
   font-weight: 400;
   line-height: 44px;
-  transform: translate(10px, 40px);
+  transform: translate(10px, 36px);
+  font-size: 28px;
 }
 
 .email {
@@ -556,12 +658,13 @@ li {
   font-style: normal;
   font-weight: 400;
   line-height: 44px;
-  transform: translate(10px, 40px);
+  transform: translate(10px, 36px);
+  font-size: 28px;
 }
 
 .phone input {
   width: 213px;
-  height: 42px;
+  height: 34px;
   background: rgba(255, 255, 255, 0.4);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.5px);
@@ -582,13 +685,14 @@ li {
   float: left;
   font-style: normal;
   font-weight: 400;
-  line-height: 44px;
+  line-height: 42px;
   transform: translate(10px, 78px);
+  font-size: 28px;
 }
 
 .check_number input {
   width: 213px;
-  height: 42px;
+  height: 34px;
   background: rgba(255, 255, 255, 0.4);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.5px);
@@ -617,7 +721,18 @@ li {
   height: 16px;
   font-size: 10px;
   color: #006EFF;
-  transform: translate(-42px, 78px);
+  transform: translate(179px, 41px);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.email button {
+  width: 100px;
+  height: 16px;
+  font-size: 10px;
+  color: #006EFF;
+  transform: translate(179px, 41px);
   border: none;
   background: none;
   cursor: pointer;

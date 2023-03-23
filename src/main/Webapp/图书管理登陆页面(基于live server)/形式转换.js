@@ -228,6 +228,7 @@ function register_config() {
     var email_register_list = document.querySelector('.email_register_list_One');
     var phone_register_list = document.querySelector('.phone_register_list_One');
 
+
     var phone_Number = document.getElementById('phone_Number');
     var email_get = document.getElementById('email_get');
     var phone_get = document.getElementById('phone_get');
@@ -246,31 +247,13 @@ function register_config() {
         email_register_list.style.display = "none";
         phone_register_list.style.display = "block";
     }
-    var time = 60;//验证码倒计时
-
+    
     //验证邮箱是否合法
     var email_value = document.getElementById('email_value');
     email_value.onblur = function () {
         var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
         if (!reg.test(email_value.value)) {
             alert("请重新输入邮箱地址");
-        }
-        else {
-            email_get.addEventListener("click", function () {
-                email_get.disabled = true;
-                var timer = setInterval(function () {
-                    if (time == 0) {
-                        clearInterval(timer);
-                        email_get.disabled = false;
-                        email_get.innerHTML = "获取邮箱验证码";
-                        time = 60;
-                    }
-                    else {
-                        email_get.innerHTML = "还剩下" + time + "秒";
-                        time--;
-                    }
-                }, 1000);
-            });
         }
     }
     // 验证手机号是否合法
@@ -279,70 +262,40 @@ function register_config() {
         var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
         if (!reg.test(phone_number.value)) {
             alert("请重新输入手机号");
+
         }
-        else {
-            phone_get.addEventListener("click", function () {
-                phone_get.disabled = true;
-                var timer = setInterval(function () {
-                    if (time == 0) {
-                        clearInterval(timer);
-                        phone_get.disabled = false;
-                        phone_get.innerHTML = "获取短信验证码";
-                        time = 60;
-                    }
-                    else {
-                        phone_get.innerHTML = "还剩下" + time + "秒";
-                        time--;
-                    }
-                }, 1000);
-            });
-        }
-    }
 
-    var btn01 = document.getElementById("btn01");
-    var btn02 = document.getElementById("btn02")
-    var inputs = document.querySelectorAll('input');
+        var btn01 = document.getElementById("btn01");
+        var btn02 = document.getElementById("btn02")
+        var inputs = document.querySelectorAll('input');
 
-    btn01.addEventListener("click", () => {
-        finish()
-    })
-    btn02.addEventListener("click", () => {
-        finish()
-    })
+        btn01.addEventListener("click", () => {
+            finish()
+        })
+        btn02.addEventListener("click", () => {
+            finish()
+        })
 
-    function finish() {
-        let n = 0;
-        for (let i = 0; i < 5; i++) {
-            if (inputs[i].value == "") {
-                n++;
+        function finish() {
+            let n = 0;
+            for (let i = 0; i < 5; i++) {
+                if (inputs[i].value == "") {
+                    n++;
+                }
+            }
+            if (n == 0) {
+                alert("注册成功");
+                const decoration = document.getElementsByClassName("decoration")[0]
+                decoration.remove()
+                users_sing_in.classList.replace("user_register", "users_sing_in")
+                users_sing_in.innerHTML = foo.main_copy.innerHTML
+                users_moniter_config()
+                user_moniter_config()
+            }
+            else {
+                alert("请完善信息");
             }
         }
-        if (n == 0) {
-            alert("注册成功");
-            const decoration = document.getElementsByClassName("decoration")[0]
-            decoration.remove()
-            users_sing_in.classList.replace("user_register", "users_sing_in")
-            users_sing_in.innerHTML = foo.main_copy.innerHTML
-            users_moniter_config()
-            user_moniter_config()
-        }
-        else {
-            alert("请完善信息");
-        }
+
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
