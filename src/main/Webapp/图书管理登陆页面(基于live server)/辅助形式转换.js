@@ -10,19 +10,26 @@ user_register_copy.innerHTML = `<div class="user_register_type">
                             <div class="name_msg" >姓名</div>
                             <input type= "text" id= "name">
                         </div>
-                        <div class="number">
-                            <div class="number_msg" >学号</div>
+                        <div class="stu_number">
+                            <div class="stu_number_msg" >学号</div>
                             <input type= "text" id= "number">
+                        </div>
+                        <div class="phone_number">
+                            <div class="phone_number_msg" >手机号码</div>
+                            <input type= "text" id= "phone_number">
                         </div>
                     </div>
                     <div class="list_two">
-                        <div class="phone">
-                            <div class="phone_number" id="phone_Number">电话号码</div>
-                            <input type="text" id="phone_number">
-                            <button class="phone_get" id="phone_get">获取短信验证码</button>
+                        <div class="direction">
+                            <div class="direction_msg" id="direction">方向</div>
+                            <input type="text" id="number">
                         </div>
-                        <div class="check_number">
-                            <div class="check_number_number">验&ensp;证&ensp;码</div>
+                        <div class="num_of_periods">
+                            <div class="num_of_periods_msg">期数</div>
+                            <input type="text" id="check_number">
+                        </div>
+                        <div class="reg_password">
+                            <div class="reg_password_msg">密码</div>
                             <input type="text" id="check_number">
                         </div>
                         <button id = "btn01">注册</button>
@@ -37,19 +44,26 @@ user_register_copy.innerHTML = `<div class="user_register_type">
                             <div class="name_msg" >姓名</div>
                             <input type= "text" id= "name">
                         </div>
-                        <div class="number">
-                            <div class="number_msg" >学号</div>
+                        <div class="stu_number">
+                            <div class="stu_number_msg" >学号</div>
                             <input type= "text" id= "number">
+                        </div>
+                        <div class="phone_number">
+                            <div class="phone_number_msg" >邮箱地址</div>
+                            <input type= "text" id= "email_value">
                         </div>
                     </div>
                     <div class="list_two">
-                        <div class="phone">
-                            <div class="email" id="email">邮箱地址</div>
-                            <input type="text" id="email_value">
-                            <button class="email_get" id="email_get">获取邮箱验证码</button>
+                        <div class="direction">
+                            <div class="direction_msg" id="direction">方向</div>
+                            <input type="text" id="">
                         </div>
-                        <div class="check_number">
-                            <div class="check_number_number">验&ensp;证&ensp;码</div>
+                        <div class="num_of_periods">
+                            <div class="num_of_periods_msg">期数</div>
+                            <input type="text" id="check_number">
+                        </div>
+                        <div class="reg_password">
+                            <div class="reg_password_msg">密码</div>
                             <input type="text" id="check_number">
                         </div>
                         <button id = "btn02">注册</button>

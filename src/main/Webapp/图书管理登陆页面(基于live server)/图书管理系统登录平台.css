@@ -1,5 +1,5 @@
 body {
-  background: url(https://liangjia.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720230131162127%201.png);
+  background: url(https://aaaaaabc.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720230131162127%201.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -523,21 +523,37 @@ input {
   backdrop-filter: blur(4.5px);
   border-radius: 5px;
   border: 0;
-  transform: translate(55px, 41px);
+  transform: translate(76px, 41px);
 }
 
-
-
-.number_msg {
+.direction_msg{
+    float: left;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 44px;
+      transform: translate(105px, 36px);
+      font-size: 28px;
+}
+.direction input{
+    width: 213px;
+      height: 34px;
+      background: rgba(255, 255, 255, 0.4);
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(4.5px);
+      border-radius: 5px;
+      border: 0;
+      transform: translate(175px, 41px);
+}
+.num_of_periods_msg {
   float: left;
   font-style: normal;
   font-weight: 400;
   line-height: 44px;
-  transform: translate(-47px, 142px);
+  transform: translate(105px, 105px);
   font-size: 28px;
 }
 
-.number input {
+.num_of_periods input {
   width: 213px;
   height: 34px;
   background: rgba(255, 255, 255, 0.4);
@@ -545,14 +561,73 @@ input {
   backdrop-filter: blur(4.5px);
   border-radius: 5px;
   border: 0;
-  transform: translate(0px, 146px);
+  transform: translate(175px, 112px);
+}
+.reg_password_msg {
+  float: left;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 44px;
+  transform: translate(105px, 169px);
+  font-size: 28px;
+}
+
+.reg_password input {
+  width: 213px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.5px);
+  border-radius: 5px;
+  border: 0;
+  transform: translate(175px, 170px);
+}
+
+
+.stu_number_msg {
+  float: left;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 44px;
+  transform: translate(-47px, 116px);
+  font-size: 28px;
+}
+
+.stu_number input {
+  width: 213px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.5px);
+  border-radius: 5px;
+  border: 0;
+  transform: translate(20px, 116px);
+}
+.phone_number_msg{
+    float: left;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 44px;
+      transform: translate(-4px, 144px);
+      font-size: 28px
+}
+.phone_number input{
+      width: 213px;
+      height: 34px;
+      background: rgba(255, 255, 255, 0.4);
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(4.5px);
+      border-radius: 5px;
+      border: 0;
+      transform: translate(9px, 136px);
 }
 
 #btn01,
 #btn02 {
-  width: 170px;
+  width: 300px;
   height: 53px;
   border-radius: 30px;
+  border: none;
   background: #006EFF;
   color: #ffffff;
   font-size: 23px;
@@ -560,7 +635,7 @@ input {
   bottom: 33px;
   right: 170px;
   transition: all .5s;
-  transform: translateX(75px);
+  transform: translate(-29px,75px);
 }
 
 #btn01:hover,
