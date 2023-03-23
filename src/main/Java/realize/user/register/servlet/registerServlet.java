@@ -16,8 +16,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet(name = "/registerServlet" , value = "/registe-servlet")
+@WebServlet(name = "/registerServlet" , value = "/register-servlet")
 public class registerServlet extends HttpServlet {
+    //负责注册功能
+    //字段:name period direction student_ID email password
 
     registerService registersv;
 
@@ -52,16 +54,18 @@ public class registerServlet extends HttpServlet {
         //判断是否注册成功
         try {
             if(!registersv.registerTest(register.getName())){
-                registerdao.userRegister(register.getName(),register.getDirection(),register.getPhoneNumber(),register.getEmail(),register.getPassword());
+                registerdao.userRegister(register.getName(),register.getPeriod(),register.getDirection(),register.getStudent_ID(),register.getEmail(),register.getPassword());
                 returnCodeEntity code = new returnCodeEntity(201,"注册成功");
-                String json = JSONObject.toJSONString(code);
-                printWriter.println(json);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("data",code);
+                printWriter.write(jsonObject.toJSONString());
 
 
             }else {
                 returnCodeEntity code = new returnCodeEntity(-1,"用户已存在");
-                String json = JSONObject.toJSONString(code);
-                printWriter.println(json);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("data",code);
+                printWriter.write(jsonObject.toJSONString());
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -3,7 +3,10 @@ package realize.user.reference.dao;
 import Util.JDBCUtil.JDBCUtil;
 import realize.user.reference.entity.booksEntity;
 
+
 import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class referenceDao {
@@ -25,13 +28,13 @@ public class referenceDao {
         //定义书籍类的集合 , 最后返回该集合
         ArrayList<booksEntity> booksEntities = new ArrayList<>();
         while(resultSet.next()){
-            booksEntity booksEntity = new booksEntity();
-            booksEntity.getBookname();
-            booksEntity.getWriter();
-            booksEntity.getPublishing_house();
-            booksEntity.getNumber();
-            booksEntity.getClassification();
-            booksEntity.getIntroduction();
+            booksEntity booksEntity=new booksEntity();
+            booksEntity.setBookname(resultSet.getNString("bookName"));
+            booksEntity.setWriter(resultSet.getString("writer"));
+            booksEntity.setPublishing_house(resultSet.getString("Publishing_house"));
+            booksEntity.setNumber(resultSet.getString("number"));
+            booksEntity.setClassification(resultSet.getString("classification"));
+            booksEntity.setIntroduction(resultSet.getString("introduction"));
             booksEntities.add(booksEntity);
 
         }
@@ -72,9 +75,9 @@ public class referenceDao {
     //关键字搜索展示
     public ArrayList<booksEntity> presentcertainBook(String bookName) throws Exception{
         Connection conn = JDBCUtil.getConnection();
-        String sql = "select * from library.books where bookname = ?";
+        String sql = "select * from library.books where bookname like '%"+bookName+"%'";
         PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1,bookName);
+        //pstmt.setString(1,bookName);
         ResultSet rs = pstmt.executeQuery();
         ArrayList<booksEntity> booksEntities = new ArrayList<>();
         while (rs.next()) {
@@ -95,4 +98,5 @@ public class referenceDao {
         pstmt.close();
         return booksEntities;
     }
+
 }

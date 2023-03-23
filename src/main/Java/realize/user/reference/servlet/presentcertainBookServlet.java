@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 @WebServlet(name = "/presentcertainBookServlet",value = "/presentcertainBook-servlet")
 public class presentcertainBookServlet extends HttpServlet {
+    //展示指定书名的书籍
+    //字段:bookName
     private referenceDao referenceDao = new referenceDao();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,13 +40,13 @@ public class presentcertainBookServlet extends HttpServlet {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        System.out.println(booksEntities);
-        String jsonString = JSON.toJSONString(booksEntities);
-        response.setContentType("text/json;charset=UTF-8");
-        response.getWriter().write(jsonString);
+        JSONObject jsonObject = new JSONObject();
         returnCodeEntity code = new returnCodeEntity(205,"按照书名展示书籍成功");
-        String json = JSONObject.toJSONString(code);
-        printWriter.println(json);
+        jsonObject.put("data", booksEntities);
+        jsonObject.put("information", code);
+        System.out.println(jsonObject.toJSONString());
+        response.setContentType("text/json;charset=UTF-8");
+        printWriter.write(jsonObject.toJSONString());
 
     }
 

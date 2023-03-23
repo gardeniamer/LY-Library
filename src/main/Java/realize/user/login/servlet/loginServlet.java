@@ -18,82 +18,77 @@ import java.nio.charset.StandardCharsets;
 
 @WebServlet(name = "/loginServlet" , value = "/login-servlet")
 public class loginServlet extends HttpServlet {
-
+    //负责登录
+    //字段 student_ID password
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
-        /*PrintWriter out = response.getWriter();
-        InputStreamReader is = new InputStreamReader(request.getInputStream(), StandardCharsets.UTF_8);
-        StringBuilder sb = new StringBuilder();
-        int read = is.read();
-        while (read!=-1){
-            sb.append((char)read);
-            read = is.read();
-        }
-        //Json转化
-        Object json = JSON.parse(sb.toString());
-        loginEntity loginEntity = JSON.parseObject(String.valueOf(json),loginEntity.class);
-        System.out.println(loginEntity);
-        String phoneNumber = String.valueOf(loginEntity.getPhoneNumber());
-        String email = String.valueOf(loginEntity.getEmail());
-        String password = String.valueOf(loginEntity.getPassword());
-        loginService ls = new loginService();
-        try {
-            if (phoneNumber.equals("admin")&&password.equals("admin")){
-                HttpSession session = request.getSession();
-                session.setAttribute("user",loginEntity);
-                //设置响应
-                response.getWriter().write("管理员登陆成功");
-            }
-            else if (ls.LoginTest(phoneNumber,email,password)){
-                HttpSession session = request.getSession();
-                session.setAttribute("user",loginEntity);
-                //设置响应
-                response.getWriter().write("用户登陆成功");
-            }else {
-                response.getWriter().write("登录失败");
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }*/
-
-
-        //数据读取
         PrintWriter printWriter = response.getWriter();
         BufferedReader bufferedReader = request.getReader();
         StringBuilder stringBuilder = new StringBuilder();
+        //InputStreamReader is = new InputStreamReader(request.getInputStream(), StandardCharsets.UTF_8);
         String line;
         while ((line= bufferedReader.readLine())!=null){
             stringBuilder.append(line);
         }
         System.out.println(stringBuilder);
+
+
         loginEntity login = JSON.parseObject(String.valueOf(stringBuilder), loginEntity.class);
         System.out.println(login);
 
         //判断能否登陆成功
-        if (login.getPhoneNumber().equals("admin")&&login.getPassword().equals("admin")){
+        if (login.getStudent_ID().equals("admin")&&login.getPassword().equals("admin")){
+//            Cookie phoneNumber1 = new Cookie("phoneNumber", "admin");
+//            Cookie password1 = new Cookie("password", "admin");
+//            phoneNumber1.setMaxAge(60);
+//            password1.setMaxAge(60);
+//            response.addCookie(phoneNumber1);
+//            response.addCookie(password1);
             returnCodeEntity code = new returnCodeEntity(202,"管理员登陆成功");
-            String json = JSONObject.toJSONString(code);
-            printWriter.println(json);
+            JSONObject jsonObject = new JSONObject();
+            String admin = "管理员";
+            jsonObject.put("data",admin);
+            jsonObject.put("information",code);
+            printWriter.write(jsonObject.toJSONString());
+            System.out.println(jsonObject.toJSONString());
+            //request.getRequestDispatcher("MainServlet").forward(request,response);
         }else {
             try {
                 loginService loginsv = new loginService();
-                if (loginsv.LoginTest(login.getPhoneNumber(),login.getEmail(),login.getPassword())){
+                if (loginsv.LoginTest(login.getStudent_ID(),login.getPassword())){
+//                    Cookie phoneNumber1 = new Cookie("phoneNumber", login.getPhoneNumber());
+//                    Cookie password1 = new Cookie("password", login.getPassword());
+//                    phoneNumber1.setMaxAge(60);
+//                    password1.setMaxAge(60);
+//                    response.addCookie(phoneNumber1);
+//                    response.addCookie(password1);
                     returnCodeEntity code = new returnCodeEntity(203,"用户登陆成功");
-                    String json = JSONObject.toJSONString(code);
-                    printWriter.println(json);
+                    JSONObject jsonObject = new JSONObject();
+                    String name = loginsv.LoginTest1(login.getStudent_ID(),login.getPassword());
+                    jsonObject.put("data",name);
+                    jsonObject.put("information",code);
+                    System.out.println(jsonObject.toJSONString());
+                    printWriter.write(jsonObject.toJSONString());
+                    //request.getRequestDispatcher("MainServlet").forward(request,response);
+                    response.getWriter().write("登录成功");
 
                 }else {
                     returnCodeEntity code = new returnCodeEntity(-2,"用户不存在或者用户名密码错误");
-                    String json = JSONObject.toJSONString(code);
-                    printWriter.println(json);
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("data",code);
+                    printWriter.write(jsonObject.toJSONString());
+                    response.getWriter().write("登陆失败");
                 }
+//                HttpSession session = request.getSession();
+//                session.setAttribute("phoneNumber",login);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
+
 
 
 

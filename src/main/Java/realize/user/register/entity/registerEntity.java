@@ -5,20 +5,11 @@ public class registerEntity {
    private String name;
    private String period;
    private String direction;
-   private String phoneNumber;
+   private String student_ID;
    private String email;
    private String password;
 
    public registerEntity() {
-   }
-
-   public registerEntity(String name, String period, String direction, String phoneNumber, String email, String password) {
-      this.name = name;
-      this.period = period;
-      this.direction = direction;
-      this.phoneNumber = phoneNumber;
-      this.email = email;
-      this.password = password;
    }
 
    public String getName() {
@@ -45,12 +36,12 @@ public class registerEntity {
       this.direction = direction;
    }
 
-   public String getPhoneNumber() {
-      return phoneNumber;
+   public String getStudent_ID() {
+      return student_ID;
    }
 
-   public void setPhoneNumber(String phoneNumber) {
-      this.phoneNumber = phoneNumber;
+   public void setStudent_ID(String student_ID) {
+      this.student_ID = student_ID;
    }
 
    public String getEmail() {
@@ -69,13 +60,22 @@ public class registerEntity {
       this.password = password;
    }
 
+   public registerEntity(String name, String period, String direction, String student_ID, String email, String password) {
+      this.name = name;
+      this.period = period;
+      this.direction = direction;
+      this.student_ID = student_ID;
+      this.email = email;
+      this.password = password;
+   }
+
    @Override
    public String toString() {
       return "registerEntity{" +
               "name='" + name + '\'' +
               ", period='" + period + '\'' +
               ", direction='" + direction + '\'' +
-              ", phoneNumber='" + phoneNumber + '\'' +
+              ", student_ID='" + student_ID + '\'' +
               ", email='" + email + '\'' +
               ", password='" + password + '\'' +
               '}';

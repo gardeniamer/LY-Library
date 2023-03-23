@@ -2,17 +2,12 @@ package realize.user.login.service;
 
 import Util.JDBCUtil.JDBCUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class loginService {
     //写关于数据库的一些操作
     //接收从数据库中获取的数据
-    private String phoneNumber1 = null;
-    private String email1 = null;
-    private String password1 = null;
+    private String name2 = null;
 
     //为了与数据库建立连接
     Connection connection;
@@ -25,24 +20,27 @@ public class loginService {
         }
     }
 
-    public boolean LoginTest(String phoneNumber, String email, String password) throws Exception {
-        String loginsql = "SELECT * FROM library.users WHERE phoneNumber = ?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(loginsql);
-            ps.setString(1, phoneNumber);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                phoneNumber1 = rs.getString("phoneNumber");
-                password1 = rs.getString("password");
-                email1 = rs.getString("email");
-                if ((phoneNumber.equals(phoneNumber1)||email.equals(email1)) && password.equals(password1)) {
-                    return true;
-                }
-            }
-            return false;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+    public String LoginTest1(String student_ID, String password) throws SQLException {
+        String loginsql = "SELECT * FROM library.users WHERE student_ID = ? and password = ?";
+        PreparedStatement ps = connection.prepareStatement(loginsql);
+        ps.setString(1,student_ID);
+        ps.setString(2,password);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            name2 = rs.getString("name");
         }
+        return name2;
+    }
+
+    public boolean LoginTest(String phoneNumber, String password) throws Exception {
+        String loginsql1 = "select * from library.users where student_ID=? and password = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(loginsql1);
+        preparedStatement.setInt(1, Integer.parseInt(phoneNumber));
+        preparedStatement.setInt(2, Integer.parseInt(password));
+        ResultSet resultSet = preparedStatement.executeQuery();
+        Boolean result = resultSet.next();
+        System.out.println("result :"+result);
+        return result;
     }
 
 }

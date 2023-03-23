@@ -51,3 +51,4 @@
 0:0:0:0:0:0:0:1 - - [15/Mar/2023:17:37:01 +0800] "GET /LYlibrary/presentBooksByclassification-servlet HTTP/1.1" 200 1098 http-bio-8080-exec-2 1729
 0:0:0:0:0:0:0:1 - - [15/Mar/2023:17:42:31 +0800] "GET /LYlibrary/presentcertainBook-servlet HTTP/1.1" 200 59 http-bio-8080-exec-2 865
 0:0:0:0:0:0:0:1 - - [15/Mar/2023:17:43:11 +0800] "GET /LYlibrary/presentcertainBook-servlet HTTP/1.1" 200 217 http-bio-8080-exec-3 73
+0:0:0:0:0:0:0:1 - - [15/Mar/2023:21:31:11 +0800] "GET /LYlibrary/registe-servlet HTTP/1.1" 200 41 http-bio-8080-exec-2 196
