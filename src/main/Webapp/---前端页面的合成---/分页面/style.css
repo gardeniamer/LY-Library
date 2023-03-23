@@ -1,0 +1,213 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.no_return_books {
+    width: 1690px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    cursor: pointer;
+
+}
+
+.box1 {
+    display: flex;
+}
+
+.top_border {
+    width: 1690px;
+    height: 72px;
+    border-bottom: 2px solid black;
+}
+
+.right_box {
+    width: 1400px;
+    height: 2500px;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.no_return_book_show {
+    display: block;
+}
+
+.book_history_show {
+    display: none;
+}
+
+.left_box {
+    width: 290px;
+    height: 2500px;
+    border-left: 2px solid black;
+}
+
+.box2 {
+    width: 290px;
+    height: 100px;
+
+}
+
+.box1 a {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 100px;
+    color: #3F88FF;
+}
+
+.box2 a {
+    position: absolute;
+    left: 50px;
+}
+
+.box3 {
+    width: 290px;
+    height: 100px;
+    border: 2px solid black;
+    border-right: hidden;
+    border-left: hidden;
+    border-bottom: 2px solid black;
+
+}
+
+.box3 a {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 100px;
+    color: black;
+    position: absolute;
+    left: 69px;
+}
+.photo {
+    width: 330px;
+    height: 400px;
+    transform: translate(28px, 5px);
+}
+
+.box:nth-child(3) .title {
+    width: 330px;
+    height: 66px;
+    transform: translate(27px, 10px);
+    color: #666666;
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 34px;
+    letter-spacing: 0em;
+    text-align: left;
+    border-bottom: 1px solid #666666;
+}
+
+.button {
+    width: 192px;
+    height: 77px;
+    transform: translate(94px, 17px);
+    line-height: 77px;
+
+    background: #3F88FF;
+    border-radius: 69px;
+
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 77px;
+    letter-spacing: 0em;
+
+    color: white;
+}
+.box:nth-child(3) .line {
+    display: flex;
+    margin-left: 5px;
+    width: 1200px;
+    height: 600px;
+    transform: translate(89px, 56px);
+}
+
+/*.line div:nth-child(1) {
+    width: 385px;
+    height: 567px;
+    transform: translate(10px, 10px);
+}
+
+.line div:nth-child(2) {
+    width: 385px;
+    height: 567px;
+    transform: translate(24px, 10px);
+}
+
+.line div:nth-child(3) {
+    width: 385px;
+    height: 567px;
+    transform: translate(37px, 10px);
+}*/
+
+.book_one {
+    width: 385px;
+    height: 567px;
+    transform: translate(10px, 10px);
+}
+
+.book_two {
+    width: 385px;
+    height: 567px;
+    transform: translate(24px, 10px);
+}
+
+.book_three{
+    width: 385px;
+    height: 567px;
+    transform: translate(37px, 10px);
+}
+
+
+.box:nth-child(3) img {
+    width: 330px;
+    height: 400px;
+}
+
+.time_all {
+    transform: translateX(24px);
+    width: 330px;
+}
+
+.box:nth-child(3) .borrow_time {
+    transform: translateY(26px);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    text-align: center;
+
+}
+
+.return_time {
+    transform: translateY(33px);
+    font-size: 24px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+
+}
+/*定义滚动条高宽及背景
+高宽分别对应横竖滚动条的尺寸*/
+body::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+    background-color: #F5F5F5;
+}
+
+/* 定义滚动条轨道
+内阴影+圆角*/
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+/*定义滑块
+内阴影+圆角*/
+body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
+}

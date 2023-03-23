@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>图书管理系统登陆平台</title>
+  <link rel="stylesheet" type="text/css" href="./图书管理系统登录平台.css" />
+</head>
+
+<body>
+  <div class="users_sing_in">
+    <img class="logo" src="https://liangjia.oss-cn-beijing.aliyuncs.com/Rectangle%2011%20(1)(1).png" />
+    <div class="title">图书管理系统</div>
+    <div class="password">密码登录</div>
+    <div class="verification">验证码登录</div>
+    <div class="select">
+      <div class="select_password"></div>
+      <div class="select_verification"></div>
+    </div>
+    <div class="password_sign_in">
+      <div class="input">
+        <input type="text" id="input_user" placeholder="请输入手机号或邮箱" />
+        <div id="tip"></div>
+        <input type="password" id="input_password" placeholder="请输入密码" />
+        <img class="input_close" src="https://liangjia.oss-cn-beijing.aliyuncs.com/Rectangle%205.png" />
+      </div>
+      <div class="check">
+        <p><input type="checkbox" />自动登录</p>
+        <p><input type="checkbox"  class = "check_box"/>记住密码</p>
+        <p style="cursor: pointer" class = "password_seek">忘记密码</p>
+      </div>
+    </div>
+    <div class="verification_sign_in">
+      <div class="input">
+        <input type="text" id="input_users" placeholder="请输入手机号" />
+        <div id="tip1"></div>
+        <input type="text" id="input_passwords" placeholder="请输入短信验证码" />
+        <button class="get_verification">获取短信验证码</button>
+      </div>
+    </div>
+    <a class="sign_in" href="#">登录</a>
+    <div class="line"></div>
+    <p class="other">其他登录方式</p>
+    <div class="others_img">
+      <img src="https://liangjia.oss-cn-beijing.aliyuncs.com/Ellipse%201.png" />
+      <img src="https://liangjia.oss-cn-beijing.aliyuncs.com/Ellipse%202.png" />
+      <img src="https://liangjia.oss-cn-beijing.aliyuncs.com/Ellipse%203.png" />
+    </div>
+
+    <a class="sign_up" href="#" id="register">立即注册</a>
+    <p class="users" id="user_moniter">管理员登录</p>
+  </div>
+
+</body>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.5/axios.min.js"></script>
+<script type="module" src="./形式转换.js"></script>
+<script type="module" src="./辅助形式转换.js"></script>
+
+
+</html>

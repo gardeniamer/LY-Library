@@ -1,0 +1,121 @@
+body {
+    background: url(https://aaaaaabc.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720230131162127%201.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+.find_password_card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 550px;
+    background-color: white;
+    display: block;
+}
+
+.find_password {
+    transform: translate(45px, 30px);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+}
+
+.send_information {
+    transform: translate(45px, 52px);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #636363;
+}
+
+
+.phone_email_number {
+    transform: translate(45px, 120px);
+
+}
+
+.check_number_input {
+    transform: translate(45px, 175px);
+}
+
+input {
+    width: 473px;
+    height: 23px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid gray;
+}
+
+
+/* .phone_email_number input {
+    width: 473px;
+    height: 23px;
+}
+
+.check_number_input input {
+    width: 473px;
+    height: 23px;
+} */
+
+
+.next_step {
+    width: 486px;
+    height: 50px;
+    background-color: #006EFF;
+    transform: translate(45px, 240px);
+    color: white;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.send_again {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #006EFF;
+
+    transform: translate(422px, 148px);
+}
+
+.set_new_password_card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 550px;
+    background-color: white;
+    display: none;
+}
+
+.set_new_password {
+    transform: translate(45px, 30px);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+}
+.set_password_again {
+    width: 486px;
+    height: 50px;
+    background-color: #006EFF;
+    transform: translate(45px, 240px);
+    color: white;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 8px;
+}
