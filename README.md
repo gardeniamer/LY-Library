@@ -20,18 +20,11 @@
 
 
 
-​	
-
-#### 软件架构
-
-​	待定。。。。
-
 
 
 #### 安装教程
 
-1.  利用git clone 本仓库的http地址或gitee地址来进行复制克隆   (gitee方面)
-2.  后续我们也将更新github方面的系统
+​		利用git clone 本仓库的http地址或gitee地址来进行复制克隆   (gitee与GitHub均可)
 
 
 

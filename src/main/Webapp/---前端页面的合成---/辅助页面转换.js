@@ -60,15 +60,23 @@ main_modify_copy.innerHTML = `
                                 <div class="modify_details">
                                 <div class="modify_author">
                                         书名：
-                                        <input type = "text" value = "呼啸山庄" class = "input_modify"/>
+                                        <input type = "text" value = "" class = "input_modify"/>
                                     </div>
                                     <div class="modify_author">
                                         作者：
-                                        <input type = "text" value = "艾米莉勃朗特【英】" class = "input_modify"/>
+                                        <input type = "text" value = "" class = "input_modify"/>
+                                    </div>
+                                                                    <div class="modify_author">
+                                        分类：
+                                        <input type = "text" value = "" class = "input_modify"/>
+                                    </div>
+                                                                    <div class="modify_author">
+                                        数量：
+                                        <input type = "text" value = "" class = "input_modify"/>
                                     </div>
                                     <div class="modify_country">
                                         出版社：
-                                        <input type = "text" value = "译林出版社" class = "input_modify"/>
+                                        <input type = "text" value = "" class = "input_modify"/>
                                     </div>
                                     <div class="modify_content">
                                     简介:

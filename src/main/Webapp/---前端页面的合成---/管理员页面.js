@@ -8,6 +8,17 @@ const background = document.getElementsByClassName("background")[0]
 const main_all = document.getElementsByClassName("main_all")[0]
 const Export_more = document.getElementsByClassName("Export_more")[0]
 const ul_load = document.createElement("ul")
+ul_load.className = "main_02"
+const add_load = `<div>
+                        <div></div>
+                    </div>`
+for (let i = 0; i < 3; i++) {
+    const div_load = document.createElement("div")
+    div_load.insertAdjacentHTML("beforeend", `${add_load}`)
+    ul_load.appendChild(div_load)
+}
+
+main.append(ul_load)
 var docCookies = {
     getItem: function (sKey) {
         return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[-.+*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
@@ -45,20 +56,10 @@ var docCookies = {
         return aKeys;
     }
 };
-if (docCookies.getItem("default_name") == undefined && docCookies.getItem("default_pass") == undefined) {
+//依据cookie来判断用户是否为恶意用户，防止管理员端数据丢失
+if (docCookies.getItem("default_name") != undefined && docCookies.getItem("default_pass") == undefined) {
     location.replace("./警告.html")
 }
-ul_load.className = "main_02"
-const add_load = `<div>
-                        <div></div>
-                    </div>`
-for (let i = 0; i < 3; i++) {
-    const div_load = document.createElement("div")
-    div_load.insertAdjacentHTML("beforeend", `${add_load}`)
-    ul_load.appendChild(div_load)
-}
-
-main.append(ul_load)
 
 let arr_show = ['url("https://roninz.oss-cn-beijing.aliyuncs.com/Rectangle 33 (1).png")', 'url("https://roninz.oss-cn-beijing.aliyuncs.com/Rectangle 34 (1).png")', 'url("https://roninz.oss-cn-beijing.aliyuncs.com/Rectangle 35.png")']
 let brr_show = ["《傲慢与偏见》 数量：5", "《呼啸山庄》  数量：5", "《瓦尔登湖》  数量：5"]
@@ -71,11 +72,11 @@ let brr_show = ["《傲慢与偏见》 数量：5", "《呼啸山庄》  数量�
 //     })
 
 let instance = axios.create({
-    baseURL: "http://frphn1.chickfrp.com:56565/LYlibrary/presentAllBooks-servlet",
+    baseURL: "http://202.182.125.24:41348/LYlibrary/presentAllBooks-servlet",
     timeout: 6000
 })
 let instance2 = axios.create({
-    baseURL: 'http://frphn1.chickfrp.com:56565/LYlibrary/borrowerAllRecord-servlet',
+    baseURL: 'http://202.182.125.24:41348/LYlibrary/borrowerAllRecord-servlet',
     timeout: 6000
 })
 
@@ -88,17 +89,8 @@ const more_new = `<div class="bg_pic_more"><div class="add">
 import * as foo from "./辅助页面转换.js"
 
 modify_config()
+date_realize()
 
-
-// if (main_all.firstElementChild.className == "main" || main_all.firstElementChild.className == "main_seek" || main_all.firstElementChild.className == "main_export") {
-//     main_all.style.height = "2000px"
-// }
-// if (main_all.firstElementChild.className == "main_modify" || main_all.firstElementChild.className == "main_add") {
-//     main_all.style.height = "500px"
-// }
-// if (main_all.firstElementChild.className == "main_examine") {
-//     main_all.style.height = "445px"
-// }
 
 //导航栏以及书籍的展示方式
 window.addEventListener("scroll", () => {
@@ -206,31 +198,39 @@ function modify_config() {
             const modify_content = document.getElementsByClassName("modify_content")[0]
             const input_modifys = document.getElementsByClassName("input_modify")
             const textarea_modify = document.getElementsByClassName("textarea_modify")[0]
-            document.getElementById("modify_introduce").value = "小说描写吉卜赛弃儿希斯克利夫被山庄老主人收养后，因受辱和恋爱不遂，外出致富。回来后，对与其女友……"
+            document.getElementById("modify_introduce").value = "..."
+            instance({
+                method: 'get',
+            }).then((res) => {
+                console.log(res.data.data);
+                input_modifys[0].value = res.data.data[5].bookname
+                input_modifys[1].value = res.data.data[5].writer
+                input_modifys[2].value = res.data.data[5].classification
+                input_modifys[3].value = res.data.data[5].number
+                input_modifys[4].value = res.data.data[5].publishing_house
+                textarea_modify.value = res.data.data[5].introduction
+            }).catch((err) => {
+                console.log("出错了！！！", err);
+            })
             const modify_btn = document.getElementsByClassName("modify_btn")[0]
             modify_btn.addEventListener("click", () => {
                 alert("修改成功...")
 
-                // instance({
-                //     method: 'get',
-                // }).then((res) => {
-                //     console.log(res.data);
-                // }).catch((err) => {
-                //     console.log("出错了！！！",err);
-                // })
-
-                // instance({
-                //     method: 'post',
-                //     data: {
-                //         bookname: `${input_modifys[0].value}`,
-                //         publishing_house: `${input_modifys[2].value}`,
-                //         writer: `${input_modifys[1].value}`,
-                //         introduction: `${textarea_modify.value}`
-                //     }
-                // }).then((res) => { })
-                //     .catch((err) => {
-                //         console.log("出错了！！",err);
-                // })
+                axios({
+                    method: 'post',
+                    url: 'http://202.182.125.24:41348/LYlibrary/update',
+                    data: {
+                        updateBookname: `${input_modifys[0].value}`,
+                        classification: `${input_modifys[2].value}`,
+                        introduction: `${textarea_modify.value}`,
+                        number: `${input_modifys[3].value}`,
+                        publishing_house: `${input_modifys[4].value}`,
+                        writer: `${input_modifys[1].value}`,
+                    }
+                }).then((res) => { })
+                    .catch((err) => {
+                        console.log("出错了！！", err);
+                    })
 
                 main.classList = "main"
                 main.innerHTML = foo.main_copy.innerHTML
@@ -317,7 +317,7 @@ function examine_config() {
             examine_realize_copy.textContent = res.data.data.length
             examine_realize.textContent = res.data.data.length
             if (examine_detail.children.length != res.data.data.length) {
-                for (let i = examine_detail.children.length; i < res.data.data.length; i++){
+                for (let i = examine_detail.children.length; i < res.data.data.length; i++) {
                     const div = document.createElement("div")
                     div.className = "msg"
                     div.innerHTML = `<div class="msg02_left"></div>
@@ -347,6 +347,7 @@ function examine_config() {
                 }
             }
         })
+        //审批数量的自动校正
         setInterval(() => {
             if (examine_detail.children.length != examine_detail_number) {
                 examine_detail_number = examine_detail.children.length
@@ -413,46 +414,46 @@ function examine_config() {
             })
 
         })
-            const accepts = document.getElementsByClassName("accept")
-            const refuses = document.getElementsByClassName("refuse")
-            const refuse_more = document.getElementsByClassName("refuse_more")[0]
-            const submit = document.getElementById("submit")
+        const accepts = document.getElementsByClassName("accept")
+        const refuses = document.getElementsByClassName("refuse")
+        const refuse_more = document.getElementsByClassName("refuse_more")[0]
+        const submit = document.getElementById("submit")
 
-            for (let vol of accepts) {
-                console.log(vol);
-                vol.addEventListener("click", () => {
+        for (let vol of accepts) {
+            console.log(vol);
+            vol.addEventListener("click", () => {
 
-                    alert("操作成功。。")
-                    vol.parentElement.parentElement.parentElement.remove()
+                alert("操作成功。。")
+                vol.parentElement.parentElement.parentElement.remove()
+            })
+
+        }
+
+        for (let vol of refuses) {
+            let n
+
+            vol.addEventListener("click", () => {
+                refuse_more.style.opacity = "1"
+                submit.addEventListener("click", () => {
+                    if (submit.previousElementSibling.value != "") {
+                        alert("操作成功。。。")
+                        console.log(vol.previousElementSibling);
+                        vol.previousElementSibling.parentElement.parentElement.parentElement.remove()
+                        submit.previousElementSibling.value = ""
+                        refuse_more.style.opacity = "0"
+                    }
+                    else {
+                        submit.previousElementSibling.placeholder = "请输入拒绝的理由。。。。。"
+                    }
                 })
 
-            }
+            })
 
-            for (let vol of refuses) {
-                let n
-
-                vol.addEventListener("click", () => {
-                    refuse_more.style.opacity = "1"
-                    submit.addEventListener("click", () => {
-                        if (submit.previousElementSibling.value != "") {
-                            alert("操作成功。。。")
-                            console.log(vol.previousElementSibling);
-                            vol.previousElementSibling.parentElement.parentElement.parentElement.remove()
-                            submit.previousElementSibling.value = ""
-                            refuse_more.style.opacity = "0"
-                        }
-                        else {
-                            submit.previousElementSibling.placeholder = "请输入拒绝的理由。。。。。"
-                        }
-                    })
-
-                })
-
-                vol.addEventListener("dblclick", () => {
-                    refuse_more.style.opacity = "0"
-                })
-                n++
-            }
+            vol.addEventListener("dblclick", () => {
+                refuse_more.style.opacity = "0"
+            })
+            n++
+        }
         modify_config()
 
     })
@@ -471,7 +472,9 @@ function add_del() {
                 vol.innerHTML = "<div class='circle'>修改</div>"
             }
             const uls = document.getElementsByTagName("ul")
-            uls[uls.length - 1].innerHTML = ""
+            if (uls[uls.length - 1].firstElementChild.style.backgroundImage == "") {
+                uls[uls.length - 1].innerHTML = ""
+            }
 
             modify_config()
         })
@@ -520,24 +523,32 @@ function add_del() {
                     if (m == 1) {
                         alert("书籍添加成功...")
                         const input_adds = document.getElementsByClassName("input_add")
-                        // instance({
-                        //     method: 'post',
-                        //     data: {
-                        //         bookname: `${input_adds[0].value}`,
-                        //         classificaton: `${input_adds[1].value}`,
-                        //         writer: `${input_adds[2].value}`,
-                        //         number: `${input_adds[3].value}`,
-                        //         publishing_house: `${input_adds[4].value}`,
-                        //         introduction:`${textarea.value}`
-                        //     }
-                        // }).then((res) => {
-                        //     // console.log(res);
-                        // }).catch((err) => {
-                        //     console.log("出错了！",err);
-                        // })
+                        instance({
+                            method: 'post',
+                            data: {
+                                bookname: `${input_adds[0].value}`,
+                                classificaton: `${input_adds[1].value}`,
+                                writer: `${input_adds[2].value}`,
+                                number: `${input_adds[3].value}`,
+                                publishing_house: `${input_adds[4].value}`,
+                                introduction: `${textarea.value}`
+                            }
+                        }).then((res) => {
 
-                        main.classList = "main"
-                        main.innerHTML = foo.main_copy.innerHTML
+                        }).catch((err) => {
+                            console.log("出错了！", err);
+                        })
+                        instance({
+                            method: 'get',
+                        }).then((res) => {
+                            const li = document.createElement("li")
+                            li.style.backgroundImage = res.data.data[res.data.data.length - 1].background
+                            main.classList = "main"
+                            main.innerHTML = foo.main_copy.innerHTML
+                            main.appendChild(li)
+                        })
+
+
                         modify_config()
                     }
                 })
@@ -777,7 +788,7 @@ function EXport_config() {
             const book_more_msg_return = document.getElementsByClassName("book_more_msg01")
             axios({
                 method: 'get',
-                url: 'http://frphn1.chickfrp.com:56565/LYlibrary/showUsers-servlet'
+                url: 'http://202.182.125.24:41348/LYlibrary/showUsers-servlet'
             }).then((res) => {
                 console.log(res.data.data);
                 for (let vol of res.data.data) {
@@ -886,9 +897,8 @@ function EXport_config() {
                 vol.value = "小云云"
             }
 
-            axios({
+            instance2({
                 method: 'get',
-                url: 'http://frphn1.chickfrp.com:56565/LYlibrary/borrowerAllRecord-servlet'
             }).then((res) => {
                 console.log(res.data.data);
                 for (let vol of res.data.data) {
@@ -945,7 +955,6 @@ function EXport_config() {
 
             })
 
-            date_realize()
 
         })
 
@@ -982,30 +991,40 @@ modify.addEventListener("click", () => {
 
 //书籍逾期提醒功能
 function date_realize() {
-    const book_more_msg_borrow = document.getElementsByClassName("book_score")[0]
-    const book_more_msg_return = document.getElementsByClassName("book_more_msg01")[0]
-    if (book_more_msg_borrow.textContent != "") {
-        let return_date = book_more_msg_return.textContent
-        let date_arr = []
-        let date_str_real = 20
-        let date_str_from = ""
-        const re = /\d+/ig
-        let result = re.exec(return_date)
-        while (result) {
-            date_arr.push(result[0])
-            result = re.exec(return_date)
+    instance2({
+        method: 'get',
+    }).then((res) => {
+        let crr = [], crr2 = []
+        for (let vol of res.data.data) {
+            crr.push(vol.borrow_Date)
+            crr2.push(vol.return_Date)
         }
-        for (let vol of date_arr) {
-            date_str_real += vol.toString()
-        }
-        let timer = setInterval(() => {
-            let d = new Date()
-            date_str_from = d.getFullYear().toString() + (d.getMonth() + 1).toString() + d.getDate().toString()
-            if (Number(date_str_real) === date_str_from) {
-                clearInterval(timer)
+        let special_borrow = 0
+        for (let vol of crr) {
+            if (vol != undefined) {
+                let date_arr = []
+                let date_str_real = 20
+                let date_str_from = ""
+                const re = /\d+/ig
+                let result = re.exec(crr2[special_borrow])
+                while (result) {
+                    date_arr.push(result[0])
+                    result = re.exec(crr2[special_borrow])
+                }
+                for (let vol of date_arr) {
+                    date_str_real += vol.toString()
+                }
+                let timer = setInterval(() => {
+                    let d = new Date()
+                    date_str_from = d.getFullYear().toString() + (d.getMonth() + 1).toString() + d.getDate().toString()
+                    if (Number(date_str_real) === date_str_from) {
+                        clearInterval(timer)
+                    }
+                }, 86400000);
             }
-        }, 86400000);
-    }
+            special_borrow++
+        }
+    })
 }
 
 

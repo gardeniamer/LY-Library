@@ -45,19 +45,13 @@ const all = `<div class="decoration">
         <div class="sum">图书管理系统</div>
     </div>`
 
-
 import * as foo from "./辅助形式转换.js"
 
 users_moniter_config()
 user_moniter_config()
 password_seek_()
 
-//忘记密码的页面切换
-function password_seek_() {
-    password_seek.addEventListener("click", () => {
-        location.replace("./index.html")
-    })
-}
+axios.defaults.baseURL = "http://localhost:8080/ly/"
 
 function user_moniter_config() {
 
@@ -90,17 +84,6 @@ function users_moniter_config() {
     var spwd = document.querySelector(".select_password ");
     var svft = document.querySelector(".select_verification");
     let judge2 = false;
-
-    // axios({
-    //   method: "get",
-    //   url: "http://202.182.125.24:29508/Manager/login"
-    // })
-    //   .then((result) => {
-    //   console.log(result.data);
-    //   })
-    //   .catch((err) => {
-    //   console.log(err);
-    // })
 
     verification.onclick = function () {
         spwd.style.backgroundColor = "rgba(0, 0, 0, 0)";
@@ -208,14 +191,37 @@ function users_moniter_config() {
             if (judge === false) {
                 alert("请完善信息！");
             } else if (pwd.value !== "") {
-                alert("登陆成功");
+
                 docCookies.setItem("users", `${inputUser.value}`, "86400")
                 if (check_box.checked == true) {
                     docCookies.setItem("users_password", `${pwd.value}`, "86400")
                 }
+                axios({
+                    method: 'get',
+                    url: "login-servlet",
+                }).then((res) => {
+                    for (let vol of res.data.data) {
+                        if (docCookies.getItem("users") == vol.username) {
+                            if (docCookies.getItem("users_password") == vol.password) {
+                                alert("登陆成功");
+                                location.replace("./用户端主页面.html")
+                            }
+                        }
+                        else {
+                            alert("请先注册一个账号吧。。")
+                            users_sing_in.classList.replace("users_sing_in", "user_register")
+                            users_sing_in.innerHTML = foo.user_register_copy.innerHTML
+                            users_sing_in.insertAdjacentHTML("beforebegin", `${all}`)
+                            register_config()
+                        }
+                    }
+
+                }).catch((err) => {
+                    console.log("error!!", err);
+                })
                 // docCookies.removeItem("users")
                 // docCookies.removeItem("users_password")
-                location.replace("./用户端主页面.html")
+
             } else {
                 alert("请完善信息！");
             }
@@ -260,7 +266,7 @@ function moniter_config() {
                 const default_pass = /^123456$/
                 //依靠正则判断管理员用户名与密码是否符合
                 if (default_name.test(username.value) && default_pass.test(Password.value)) {
-                    docCookies.setItem("default_name", "admin","3")
+                    docCookies.setItem("default_name", "admin", "3")
                     docCookies.setItem("default_pass", "123456", "3")
                     alert("登陆成功,欢迎回家。")
                     if (docCookies.getItem("default_name") != undefined && docCookies.getItem("default_pass") != undefined) {
@@ -320,14 +326,17 @@ function register_config() {
 
         }
 
+        let special_change = 0
         var btn01 = document.getElementById("btn01");
         var btn02 = document.getElementById("btn02")
         var inputs = document.querySelectorAll('input');
 
         btn01.addEventListener("click", () => {
+            special_change = 0
             finish()
         })
         btn02.addEventListener("click", () => {
+            special_change = 1
             finish()
         })
 
@@ -339,7 +348,38 @@ function register_config() {
                 }
             }
             if (n == 0) {
+                const check_number = document.getElementById("check_number")
+                if (special_change == 0) {
+                    const phone_number = document.getElementById("phone_number")
+                    axios({
+                        method: 'post',
+                        url: 'register-servlet',
+                        data: {
+                            username: `${phone_number.value}`,
+                            password: `${check_number.value}`
+                        }
+                    }).then((res) => { })
+                        .catch((err) => {
+                            console.log("出错！！", err);
+                        })
+                }
+                else {
+                    const email_value = document.getElementById("email_value")
+                    axios({
+                        method: 'post',
+                        url: 'register-servlet',
+                        data: {
+                            username: `${email_value.value}`,
+                            password: `${check_number.value}`
+                        }
+                    }).then((res) => { })
+                        .catch((err) => {
+                            console.log("出错！！", err);
+                        })
+                }
+
                 alert("注册成功");
+
                 const decoration = document.getElementsByClassName("decoration")[0]
                 decoration.remove()
                 users_sing_in.classList.replace("user_register", "users_sing_in")
@@ -353,4 +393,11 @@ function register_config() {
         }
 
     }
+}
+
+//忘记密码的页面切换
+function password_seek_() {
+    password_seek.addEventListener("click", () => {
+        location.replace("./index.html")
+    })
 }

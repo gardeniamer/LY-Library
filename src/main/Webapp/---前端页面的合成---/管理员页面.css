@@ -316,7 +316,7 @@ ul {
 }
 
 .textarea_modify {
-    height: 110px;
+    height: 85px;
     width: 245px;
     vertical-align: top;
 }
@@ -440,7 +440,7 @@ ul {
 .modify_book {
     height: 100%;
     flex: 1.5;
-    background: url("https://roninz.oss-cn-beijing.aliyuncs.com/Rectangle 14.png");
+    background: url("https://roninz.oss-cn-beijing.aliyuncs.com/Rectangle 30.png");
     background-position: center left;
     background-repeat: no-repeat;
 }
