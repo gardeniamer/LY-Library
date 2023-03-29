@@ -142,6 +142,13 @@ var banner1 = document.querySelector(".banner1");
     var booksUl = document.querySelector(".books_ul");
     var bookImg = booksUl.querySelectorAll("img");
     var lis = booksUl.querySelectorAll("li");
+    var ul=document.querySelectorAll('ul');
+    let abc = 0 ;
+    ul[0].addEventListener('click',function(e){
+        console.log(e.target.getAttribute('index1'));
+        this.abc = e.target.getAttribute('index1')
+        
+    })
     for (var a = 0; a < bookImg.length; a++) {
       bookImg[a].setAttribute("index1", a);
       bookImg[a].onmouseover = function () {
@@ -177,9 +184,11 @@ var banner1 = document.querySelector(".banner1");
           method: "get",
           url: "http://202.182.125.24:41348/LYlibrary/presentAllBooks-servlet",
         }).then((res) => {
-          book_name.innerHTML=`${res.data.data[a].bookname}数量：`
-          book_number.innerHTML=`${res.data.data[a].number}`
-          introduce.innerHTML=`内容梗概：${res.data.data[a].introduction}`
+          for(var i=0;i<res.data.data.length;i++){
+            book_name.innerHTML=`${res.data.data[abc].bookname}数量：`
+          book_number.innerHTML=`${res.data.data[abc].number}`
+          introduce.innerHTML=`内容梗概：${res.data.data[abc].introduction}`
+        }
           });
       }
     }
@@ -222,18 +231,18 @@ var banner1 = document.querySelector(".banner1");
       }
     });
     var input_search=document.querySelector('.input_search');
-    axios({
-      method: "post",
-      url: "http://202.182.125.24:41348/LYlibrary/presentcertainBook-servlet",
-      params:':`${input_search.value}`',
-    }).then((res) => {
-      console.log(res);
-    });
-    axios({
-      method: "get",
-      url: "http://202.182.125.24:41348/LYlibrary/presentcertainBook-servlet",
-    }).then((res) => {
-      console.log(res);
-    }).catch((err) => {
-      console.log("出错了！！",err);
-    })
+    var find=document.querySelector('.find');
+    find.onclick=function(){
+      axios({
+        method: "post",
+        url: "http://202.182.125.24:41348/LYlibrary/presentcertainBook-servlet",
+        data: {
+          bookName:`${input_search.value}`
+        },
+      }).then((res) => {
+        console.log(res);
+        alert(res.data.data[0].introduction)
+      }).catch((err) => {
+            console.log("出错了",err);
+        })
+    }
