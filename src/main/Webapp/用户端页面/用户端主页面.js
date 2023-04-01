@@ -149,6 +149,11 @@ var banner1 = document.querySelector(".banner1");
         this.abc = e.target.getAttribute('index1')
         
     })
+    ul[1].addEventListener('click',function(e){
+      console.log(e.target.getAttribute('index1'));
+      this.abc = e.target.getAttribute('index1')
+      
+  })
     for (var a = 0; a < bookImg.length; a++) {
       bookImg[a].setAttribute("index1", a);
       bookImg[a].onmouseover = function () {
