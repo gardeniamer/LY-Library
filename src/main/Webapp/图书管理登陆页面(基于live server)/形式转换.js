@@ -1,23 +1,61 @@
 const users_sing_in = document.getElementsByClassName("users_sing_in")[0]
 const user_register = document.getElementsByClassName("user_register")[0]
 const moniter = document.getElementsByClassName("moniter")[0]
-
+const password_seek = document.getElementsByClassName("password_seek")[0]
+var docCookies = {
+    getItem: function (sKey) {
+        return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[-.+*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+    },
+    setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+        if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+        var sExpires = "";
+        if (vEnd) {
+            switch (vEnd.constructor) {
+                case Number:
+                    sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+                    break;
+                case String:
+                    sExpires = "; expires=" + vEnd;
+                    break;
+                case Date:
+                    sExpires = "; expires=" + vEnd.toUTCString();
+                    break;
+            }
+        }
+        document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+        return true;
+    },
+    removeItem: function (sKey, sPath, sDomain) {
+        if (!sKey || !this.hasItem(sKey)) { return false; }
+        document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "");
+        return true;
+    },
+    hasItem: function (sKey) {
+        return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[-.+*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+    },
+    keys: /* optional method: you can safely remove it! */ function () {
+        var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+        for (var nIdx = 0; nIdx < aKeys.length; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
+        return aKeys;
+    }
+};
 
 const all = `<div class="decoration">
         <div class="ly"></div>
         <div class="sum">图书管理系统</div>
     </div>`
 
-
 import * as foo from "./辅助形式转换.js"
 
 users_moniter_config()
 user_moniter_config()
+password_seek_()
+
+axios.defaults.baseURL = "http://localhost:8080/ly/"
 
 function user_moniter_config() {
 
     //实现页面转换于同一个URL下
-
     register.addEventListener("click", () => {
         users_sing_in.classList.replace("users_sing_in", "user_register")
         users_sing_in.innerHTML = foo.user_register_copy.innerHTML
@@ -46,17 +84,6 @@ function users_moniter_config() {
     var spwd = document.querySelector(".select_password ");
     var svft = document.querySelector(".select_verification");
     let judge2 = false;
-
-    // axios({
-    //   method: "get",
-    //   url: "http://202.182.125.24:29508/Manager/login"
-    // })
-    //   .then((result) => {
-    //   console.log(result.data);
-    //   })
-    //   .catch((err) => {
-    //   console.log(err);
-    // })
 
     verification.onclick = function () {
         spwd.style.backgroundColor = "rgba(0, 0, 0, 0)";
@@ -115,6 +142,14 @@ function users_moniter_config() {
     var tip = document.querySelector("#tip");
     var signIn = document.querySelector(".sign_in");
     var inputUser = document.querySelector("#input_user");
+    const check_box = document.getElementsByClassName("check_box")[0]
+    if (docCookies.getItem("users") != undefined) {
+        inputUser.value = docCookies.getItem("users")
+    }
+    if (docCookies.getItem("users_password") != undefined) {
+        check_box.checked = true
+        pwd.value = docCookies.getItem("users_password")
+    }
     let judge = false;
     inputUser.onblur = function () {
         let email = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -133,6 +168,7 @@ function users_moniter_config() {
     };
     // 验证码登录部分是否合格
     var inputUsers = document.querySelector("#input_users");
+    console.log(inputUsers);
     var tip1 = document.querySelector("#tip1");
     let judge1 = false;
     inputUsers.onblur = function () {
@@ -155,7 +191,37 @@ function users_moniter_config() {
             if (judge === false) {
                 alert("请完善信息！");
             } else if (pwd.value !== "") {
-                alert("登陆成功");
+
+                docCookies.setItem("users", `${inputUser.value}`, "86400")
+                if (check_box.checked == true) {
+                    docCookies.setItem("users_password", `${pwd.value}`, "86400")
+                }
+                axios({
+                    method: 'get',
+                    url: "login-servlet",
+                }).then((res) => {
+                    for (let vol of res.data.data) {
+                        if (docCookies.getItem("users") == vol.username) {
+                            if (docCookies.getItem("users_password") == vol.password) {
+                                alert("登陆成功");
+                                location.replace("./用户端主页面.html")
+                            }
+                        }
+                        else {
+                            alert("请先注册一个账号吧。。")
+                            users_sing_in.classList.replace("users_sing_in", "user_register")
+                            users_sing_in.innerHTML = foo.user_register_copy.innerHTML
+                            users_sing_in.insertAdjacentHTML("beforebegin", `${all}`)
+                            register_config()
+                        }
+                    }
+
+                }).catch((err) => {
+                    console.log("error!!", err);
+                })
+                // docCookies.removeItem("users")
+                // docCookies.removeItem("users_password")
+
             } else {
                 alert("请完善信息！");
             }
@@ -164,6 +230,7 @@ function users_moniter_config() {
                 alert("请完善信息！");
             } else if (pwds.value !== "") {
                 alert("登陆成功");
+                location.replace("./用户端主页面.html")
             } else {
                 alert("请完善信息！");
             }
@@ -195,22 +262,16 @@ function moniter_config() {
                 alert("请输入默认密码ヾ(≧へ≦)〃")
             }
             else {
-                const default_name = /^a$/
-                const default_pass = /^1$/
-
-                // axios({
-                //     method: "get",
-                //     url: " "
-                // }).then((result) => {
-                //     console.log(result.data);
-                // }).catch((err) => {
-                //     console.log("出现错误.", err);
-                // })
-                
-                //依靠正则判断管理员用户名与密码是否符合(暂定)
+                const default_name = /^admin$/
+                const default_pass = /^123456$/
+                //依靠正则判断管理员用户名与密码是否符合
                 if (default_name.test(username.value) && default_pass.test(Password.value)) {
+                    docCookies.setItem("default_name", "admin", "3")
+                    docCookies.setItem("default_pass", "123456", "3")
                     alert("登陆成功,欢迎回家。")
-                    location.replace("")
+                    if (docCookies.getItem("default_name") != undefined && docCookies.getItem("default_pass") != undefined) {
+                        location.replace("./管理员页面.html")
+                    }
                 }
                 else {
                     alert("请输入正确的默认格式(可以再看看所获邀请码哦)(⊙﹏⊙)")
@@ -247,7 +308,7 @@ function register_config() {
         email_register_list.style.display = "none";
         phone_register_list.style.display = "block";
     }
-    
+
     //验证邮箱是否合法
     var email_value = document.getElementById('email_value');
     email_value.onblur = function () {
@@ -265,14 +326,17 @@ function register_config() {
 
         }
 
+        let special_change = 0
         var btn01 = document.getElementById("btn01");
         var btn02 = document.getElementById("btn02")
         var inputs = document.querySelectorAll('input');
 
         btn01.addEventListener("click", () => {
+            special_change = 0
             finish()
         })
         btn02.addEventListener("click", () => {
+            special_change = 1
             finish()
         })
 
@@ -284,7 +348,38 @@ function register_config() {
                 }
             }
             if (n == 0) {
+                const check_number = document.getElementById("check_number")
+                if (special_change == 0) {
+                    const phone_number = document.getElementById("phone_number")
+                    axios({
+                        method: 'post',
+                        url: 'register-servlet',
+                        data: {
+                            username: `${phone_number.value}`,
+                            password: `${check_number.value}`
+                        }
+                    }).then((res) => { })
+                        .catch((err) => {
+                            console.log("出错！！", err);
+                        })
+                }
+                else {
+                    const email_value = document.getElementById("email_value")
+                    axios({
+                        method: 'post',
+                        url: 'register-servlet',
+                        data: {
+                            username: `${email_value.value}`,
+                            password: `${check_number.value}`
+                        }
+                    }).then((res) => { })
+                        .catch((err) => {
+                            console.log("出错！！", err);
+                        })
+                }
+
                 alert("注册成功");
+
                 const decoration = document.getElementsByClassName("decoration")[0]
                 decoration.remove()
                 users_sing_in.classList.replace("user_register", "users_sing_in")
@@ -298,4 +393,11 @@ function register_config() {
         }
 
     }
+}
+
+//忘记密码的页面切换
+function password_seek_() {
+    password_seek.addEventListener("click", () => {
+        location.replace("./index.html")
+    })
 }
