@@ -204,7 +204,7 @@ function users_moniter_config() {
                         if (docCookies.getItem("users") == vol.username) {
                             if (docCookies.getItem("users_password") == vol.password) {
                                 alert("登陆成功");
-                                location.replace("./用户端主页面.html")
+                                location.replace("../用户端页面/用户端主页面.html")
                             }
                         }
                         else {
@@ -230,7 +230,7 @@ function users_moniter_config() {
                 alert("请完善信息！");
             } else if (pwds.value !== "") {
                 alert("登陆成功");
-                location.replace("./用户端主页面.html")
+                location.replace("../用户端页面/用户端主页面.html")
             } else {
                 alert("请完善信息！");
             }
@@ -270,7 +270,7 @@ function moniter_config() {
                     docCookies.setItem("default_pass", "123456", "3")
                     alert("登陆成功,欢迎回家。")
                     if (docCookies.getItem("default_name") != undefined && docCookies.getItem("default_pass") != undefined) {
-                        location.replace("./管理员页面.html")
+                        location.replace("../管理员页面/管理员页面.html")
                     }
                 }
                 else {
@@ -398,6 +398,6 @@ function register_config() {
 //忘记密码的页面切换
 function password_seek_() {
     password_seek.addEventListener("click", () => {
-        location.replace("./index.html")
+        location.replace("../登录界面的密码/index.html")
     })
 }
